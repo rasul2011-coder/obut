@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — VYRON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <div class="container">
+    <div class="breadcrumb" id="breadcrumb">
+      <a href="index.html">Главная</a> <span>/</span> <span id="bc-current">Каталог</span>
+    </div>
+    <h1 id="page-title">Каталог</h1>
+  </div>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <button class="btn btn--ghost filter-toggle" onclick="document.querySelector('.filters').classList.toggle('open')">Фильтры</button>
+      <div class="catalog">
+        <!-- Filters -->
+        <aside class="filters" id="filters">
+          <div class="filter-group">
+            <div class="filter-group__title">Категория</div>
+            <div class="filter-list" id="filter-categories"></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group__title">Цена</div>
+            <div class="price-range">
+              <input type="number" id="min-price" placeholder="От" min="0">
+              <span>—</span>
+              <input type="number" id="max-price" placeholder="До" min="0">
+            </div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group__title">Размер</div>
+            <div class="filter-list" id="filter-sizes"></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group__title">Цвет</div>
+            <div class="filter-color" id="filter-colors"></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-group__title">Дополнительно</div>
+            <div class="filter-list">
+              <label><input type="checkbox" id="f-discount"> Только со скидкой</label>
+              <label><input type="checkbox" id="f-new"> Новинки</label>
+              <label><input type="checkbox" id="f-hit"> Хиты продаж</label>
+            </div>
+          </div>
+          <button class="btn btn--ghost btn--block" onclick="resetFilters()">Сбросить фильтры</button>
+        </aside>
+
+        <!-- Products -->
+        <div>
+          <div class="catalog__toolbar">
+            <span class="catalog__count" id="catalog-count"></span>
+            <div class="catalog__sort">
+              <span>Сортировка:</span>
+              <select id="sort-select">
+                <option value="default">По умолчанию</option>
+                <option value="price-asc">Цена: по возрастанию</option>
+                <option value="price-desc">Цена: по убыванию</option>
+                <option value="rating">По рейтингу</option>
+                <option value="new">Сначала новинки</option>
+                <option value="discount">По размеру скидки</option>
+              </select>
+            </div>
+          </div>
+          <div class="product-grid" id="product-grid"></div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/catalog.js"></script>
+</body>
+</html>

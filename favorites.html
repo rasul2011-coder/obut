@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Избранное — VYRON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Главная</a> <span>/</span> <span>Избранное</span></div>
+    <h1>Избранное</h1>
+  </div>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="product-grid" id="fav-grid"></div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script>
+    function renderFavs() {
+      const el = document.getElementById('fav-grid');
+      const favs = Store.getFavs();
+      if (favs.length === 0) {
+        el.className = '';
+        el.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state__icon">❤️</div>
+            <h2>Список избранного пуст</h2>
+            <p>Добавляйте понравившиеся товары, нажимая на сердечко</p>
+            <a href="catalog.html" class="btn btn--primary">В каталог</a>
+          </div>`;
+        return;
+      }
+      el.className = 'product-grid';
+      const items = favs.map(id => Store.getProduct(id)).filter(Boolean);
+      el.innerHTML = items.map(Store.productCard).join('');
+    }
+    window.renderCards = renderFavs;
+    document.addEventListener('DOMContentLoaded', () => {
+      Store.initPage('');
+      renderFavs();
+    });
+  </script>
+</body>
+</html>
